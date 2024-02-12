@@ -1,0 +1,23 @@
+.tile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .tile {
+    width: 50px !important;
+    height: 50px !important;
+    background-color: grey;
+    margin: 3px !important;
+    border-radius: 0px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    text-transform: capitalize !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+
+  }
+  
