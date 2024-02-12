@@ -33,6 +33,11 @@
   }
 
   .thumbs-img{
-    width: 400px;
+    width: 300px;
+  }
+
+  .attempts{
+    font-size: 20px;
+    font-weight: bold;
   }
   

@@ -5,6 +5,8 @@ import "./game.css"; // Import CSS file
 import Keyboard from "./keyboard/keyboard";
 import title from "../title.png"; // Assuming you have an image file named keyboard_image.png in the same directory as this component
 import guessimg from "../guess.png"
+import gameover from "../game-over.png"
+
 const customWords = [
   "SGBOI",
   "ANSHI",
@@ -30,6 +32,7 @@ function Game() {
   const [targetWord, setTargetWord] = useState("");
   const [attempts, setAttempts] = useState([]);
   const [guessedLetters, setGuessedLetters] = useState([]);
+  const [gameOver, setGameOver] = useState(false)
 
 
   useEffect(() => {
@@ -100,6 +103,7 @@ const letterExists = (letter) => {
       if (attemptsLeft === 1) {
         setFeedback(`Out of attempts! The word was ${targetWord}`);
         setGuess("");
+        setGameOver(true)
       }
     }
   
@@ -126,7 +130,7 @@ const letterExists = (letter) => {
       <img src={title} alt="Keyboard" className="image"/>
       </Grid>
       <Grid item>
-        <p>Attempts Left: {attemptsLeft}</p>
+        <p className="attempts">Attempts Left: {attemptsLeft}</p>
       </Grid>
       <Grid  item>
         <TextField
@@ -147,9 +151,14 @@ const letterExists = (letter) => {
           Guess
         </Button>
       </Grid>
+      <Grid item>{
+     gameOver && (
+        <img src={gameover} className="thumbs-img"/>
+    )}
+      </Grid>
       <Grid item>
       {feedback !== "Congratulations! You guessed the word!" && (
-               <p>{feedback}</p>
+               <p className="attempts">{feedback}</p>
     )}
         {feedback === "Congratulations! You guessed the word!" && (
         <img src={guessimg} className="thumbs-img"/>
