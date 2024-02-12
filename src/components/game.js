@@ -6,6 +6,9 @@ import Keyboard from "./keyboard/keyboard";
 import title from "../title.png"; // Assuming you have an image file named keyboard_image.png in the same directory as this component
 import guessimg from "../guess.png"
 import gameover from "../game-over.png"
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { red } from "@material-ui/core/colors";
+
 
 const customWords = [
   "SGBOI",
@@ -59,6 +62,9 @@ function Game() {
   }, [attempts, guessedLetters]);
 
 // Check if a letter exists in the guessedLetters array
+const handleLetterClick = (letter) => {
+    setGuess(guess + letter.toUpperCase());
+  };
   
   // Modify the checkGuess function to handle guessed letters appropriately
   const checkGuess = () => {
@@ -213,7 +219,8 @@ function Game() {
           </div>
         </Grid>
       ))}
-    <Keyboard  guessedLetters="" onLetterClick="" keys= {guessedLetters} />
+    <Keyboard  guessedLetters="" onLetterClick={handleLetterClick} keys= {guessedLetters} />
+    <p className="footer">Created by Anshi with <FavoriteIcon className="icon"/> </p>
     </Grid>
   );
 }

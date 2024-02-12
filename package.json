@@ -4,7 +4,11 @@
   "homepage": "https://firefrost91.github.io/wordle-game",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,8 +19,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-   "predeploy": "npm run build",
-   "deploy": "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

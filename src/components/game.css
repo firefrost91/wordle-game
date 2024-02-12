@@ -1,4 +1,10 @@
-
+.paper-container{
+    padding: 10px !important;
+    border: 2px solid grey !important;
+    margin: 10px !important;
+    width: 700px !important;
+   margin-left: 350px !important;
+}
 .tile-container {
     display: flex;
     justify-content: center;
@@ -29,7 +35,7 @@
 
   .image{
     margin-top: 20px;
-    height: 150px !important;
+    height: 180px !important;
   }
 
   .thumbs-img{
@@ -40,4 +46,14 @@
     font-size: 20px;
     font-weight: bold;
   }
+  .icon{
+    color: red;
+    height: 18px !important;
+  }
+  .footer{
+    font-size: 14px;
+    margin-top: 10px;
+    bottom: 40px;
+  }
+
   
