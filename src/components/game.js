@@ -16,6 +16,21 @@ const customWords = [
   "SMILE",
   "CUTIE",
   "NASIK",
+  "JANTA",
+  "DRIVE",
+  "SHACK",
+  "TIGOR",
+  "RIFLE",
+  "TRIPS",
+  "CAFES",
+  "SLEEP",
+  "GIFTS",
+  "CATAN",
+  "POKER",
+  "MUSIC",
+  "BOOKS",
+  "WRITE",
+  "VODKA"
 ];
 
 // Define custom colors
@@ -56,7 +71,6 @@ function Game() {
     let correctCount = 0;
     const guessLower = guess.toLowerCase(); // Convert guessed word to lowercase
     var targetWordLower = targetWord.toLowerCase(); // Convert target word to lowercase
-    targetWordLower = "lolla"
   
     let charCount = {};
  
