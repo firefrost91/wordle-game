@@ -27,31 +27,29 @@ function Game() {
   }, []);
 
   useEffect(() => {
-    if (guess.length === 5) {
-      checkGuess();
-    }
-  }, [guess]);
-  useEffect(() => {
     animateTiles();
   }, [attempts]);
 
   const checkGuess = () => {
     let newTiles = [];
     let correctCount = 0;
+    console.log(guess, "GUESS")
+    const guessLower = guess.toLowerCase(); // Convert guessed word to lowercase
+    const targetWordLower = targetWord.toLowerCase(); // Convert target word to lowercase
     for (let i = 0; i < 5; i++) {
-      if (guess[i] === targetWord[i]) {
+      if (guessLower[i] === targetWordLower[i]) {
         newTiles.push({ color: customColors.correct, letter: guess[i] });
         correctCount++;
-      } else if (targetWord.includes(guess[i])) {
+      } else if (targetWordLower.includes(guessLower[i])) {
         newTiles.push({ color: customColors.partial, letter: guess[i] });
       } else {
         newTiles.push({ color: customColors.incorrect, letter: guess[i] });
       }
     }
-
+  
     const newAttempt = { guess: guess, tiles: newTiles };
     const updatedAttempts = [...attempts, newAttempt];
-
+  
     if (correctCount === 5) {
       setFeedback("Congratulations! You guessed the word!");
       setGuess("");
@@ -63,10 +61,11 @@ function Game() {
         setGuess("");
       }
     }
-
+  
     setAttempts(updatedAttempts);
     animateTiles();
   };
+  
 
   const animateTiles = () => {
     gsap.fromTo(
@@ -89,8 +88,8 @@ function Game() {
           type="text"
           maxLength="5"
           value={guess}
-          onChange={(e) => setGuess(e.target.value)}
-        />
+          onChange={(e) => setGuess(e.target.value.toUpperCase())} // Convert input to uppercase
+          />
       </Grid>
       <Grid item>
         <Button variant="contained" color="primary" onClick={checkGuess}>
