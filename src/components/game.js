@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Grid } from "@material-ui/core";
 import { gsap } from "gsap";
 import "./game.css"; // Import CSS file
-
+import Keyboard from "./keyboard/keyboard";
+import title from "../title.png"; // Assuming you have an image file named keyboard_image.png in the same directory as this component
+import guessimg from "../guess.png"
 const customWords = [
-  "hello",
-  "world",
+  "SGBOI",
+  "ANSHI",
+  "LOVES",
+  "CARES",
+  "LOLLA",
+  "SMILE",
+  "CUTIE",
+  "NASIK",
 ];
 
 // Define custom colors
@@ -21,6 +29,8 @@ function Game() {
   const [feedback, setFeedback] = useState("");
   const [targetWord, setTargetWord] = useState("");
   const [attempts, setAttempts] = useState([]);
+  const [guessedLetters, setGuessedLetters] = useState([]);
+
 
   useEffect(() => {
     setTargetWord(customWords[Math.floor(Math.random() * customWords.length)]);
@@ -28,14 +38,25 @@ function Game() {
 
   useEffect(() => {
     animateTiles();
-  }, [attempts]);
+  }, [attempts, guessedLetters]);
 
+// Check if a letter exists in the guessedLetters array
+const letterExists = (letter) => {
+    return guessedLetters.some((item) => item.letter === letter);
+  };
+  
+  // Modify the checkGuess function to handle guessed letters appropriately
   const checkGuess = () => {
+    if (guess.length !== 5) {
+      setFeedback("Please enter a 5-letter word.");
+      return;
+    }
+  
     let newTiles = [];
     let correctCount = 0;
-    console.log(guess, "GUESS")
     const guessLower = guess.toLowerCase(); // Convert guessed word to lowercase
     const targetWordLower = targetWord.toLowerCase(); // Convert target word to lowercase
+  
     for (let i = 0; i < 5; i++) {
       if (guessLower[i] === targetWordLower[i]) {
         newTiles.push({ color: customColors.correct, letter: guess[i] });
@@ -50,6 +71,26 @@ function Game() {
     const newAttempt = { guess: guess, tiles: newTiles };
     const updatedAttempts = [...attempts, newAttempt];
   
+    let updatedGuessedLetters = [...guessedLetters];
+  
+    for (let i = 0; i < 5; i++) {
+      const existingIndex = updatedGuessedLetters.findIndex(
+        (letter) => letter.letter === guess[i]
+      );
+      if (existingIndex !== -1) {
+        // If the letter already exists, retain its color
+        updatedGuessedLetters[existingIndex] = {
+          ...updatedGuessedLetters[existingIndex],
+          color: newTiles[i].color,
+        };
+      } else {
+        updatedGuessedLetters.push({
+          letter: guess[i],
+          color: newTiles[i].color,
+        });
+      }
+    }
+  
     if (correctCount === 5) {
       setFeedback("Congratulations! You guessed the word!");
       setGuess("");
@@ -63,8 +104,12 @@ function Game() {
     }
   
     setAttempts(updatedAttempts);
+    setGuessedLetters(updatedGuessedLetters);
+    console.log(guessedLetters, "TEST");
     animateTiles();
   };
+  
+  
   
 
   const animateTiles = () => {
@@ -76,19 +121,25 @@ function Game() {
   };
 
   return (
-    <Grid container direction="column" alignItems="center" spacing={2}>
+    <Grid className="paper-container" container direction="column" alignItems="center" spacing={2}>
       <Grid item>
-        <h1>Wordle Game</h1>
+      <img src={title} alt="Keyboard" className="image"/>
       </Grid>
       <Grid item>
         <p>Attempts Left: {attemptsLeft}</p>
       </Grid>
-      <Grid item>
+      <Grid  item>
         <TextField
+          className="input"
           type="text"
           maxLength="5"
           value={guess}
           onChange={(e) => setGuess(e.target.value.toUpperCase())} // Convert input to uppercase
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              checkGuess();
+            }
+          }}
           />
       </Grid>
       <Grid item>
@@ -97,11 +148,17 @@ function Game() {
         </Button>
       </Grid>
       <Grid item>
-        <p>{feedback}</p>
+      {feedback !== "Congratulations! You guessed the word!" && (
+               <p>{feedback}</p>
+    )}
+        {feedback === "Congratulations! You guessed the word!" && (
+        <img src={guessimg} className="thumbs-img"/>
+
+    )}
       </Grid>
       {attempts.map((attempt, index) => (
-        <Grid item key={index}>
-          <div style={{ display: "flex" }}>
+        <Grid className="tile-container" item key={index}>
+          <div  style={{ display: "flex" }}>
             {attempt.tiles.map((tile, i) => (
               <div
                 className="tile"
@@ -125,6 +182,7 @@ function Game() {
           </div>
         </Grid>
       ))}
+    <Keyboard  guessedLetters="" onLetterClick="" keys= {guessedLetters} />
     </Grid>
   );
 }

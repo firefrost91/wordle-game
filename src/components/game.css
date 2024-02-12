@@ -1,3 +1,4 @@
+
 .tile-container {
     display: flex;
     justify-content: center;
@@ -18,6 +19,20 @@
     text-transform: capitalize !important;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
+    font-size: 30px !important;
+    font-weight: bold !important;
+  }
+  .input input {
+    font-size: 30px !important; /* Adjust the font size as needed */
+    align-items: center !important
+  }
 
+  .image{
+    margin-top: 20px;
+    height: 150px !important;
+  }
+
+  .thumbs-img{
+    width: 400px;
   }
   
