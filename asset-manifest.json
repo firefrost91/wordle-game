@@ -1,16 +1,18 @@
 {
   "files": {
-    "main.css": "/wordle-game/static/css/main.a3783b32.css",
-    "main.js": "/wordle-game/static/js/main.051ed0bf.js",
+    "main.css": "/wordle-game/static/css/main.c1684b0f.css",
+    "main.js": "/wordle-game/static/js/main.a5a23370.js",
     "static/js/592.6d0250cc.chunk.js": "/wordle-game/static/js/592.6d0250cc.chunk.js",
+    "static/media/title.png": "/wordle-game/static/media/title.2aa4fae062be3fb3e6a8.png",
+    "static/media/guess.png": "/wordle-game/static/media/guess.abccf0cbc77744dc52fc.png",
     "static/media/logo.svg": "/wordle-game/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/wordle-game/index.html",
-    "main.a3783b32.css.map": "/wordle-game/static/css/main.a3783b32.css.map",
-    "main.051ed0bf.js.map": "/wordle-game/static/js/main.051ed0bf.js.map",
+    "main.c1684b0f.css.map": "/wordle-game/static/css/main.c1684b0f.css.map",
+    "main.a5a23370.js.map": "/wordle-game/static/js/main.a5a23370.js.map",
     "592.6d0250cc.chunk.js.map": "/wordle-game/static/js/592.6d0250cc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3783b32.css",
-    "static/js/main.051ed0bf.js"
+    "static/css/main.c1684b0f.css",
+    "static/js/main.a5a23370.js"
   ]
 }
