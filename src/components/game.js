@@ -44,9 +44,6 @@ function Game() {
   }, [attempts, guessedLetters]);
 
 // Check if a letter exists in the guessedLetters array
-const letterExists = (letter) => {
-    return guessedLetters.some((item) => item.letter === letter);
-  };
   
   // Modify the checkGuess function to handle guessed letters appropriately
   const checkGuess = () => {
@@ -58,20 +55,36 @@ const letterExists = (letter) => {
     let newTiles = [];
     let correctCount = 0;
     const guessLower = guess.toLowerCase(); // Convert guessed word to lowercase
-    const targetWordLower = targetWord.toLowerCase(); // Convert target word to lowercase
+    var targetWordLower = targetWord.toLowerCase(); // Convert target word to lowercase
+    targetWordLower = "lolla"
   
+    let charCount = {};
+ 
+    for (let i = 0; i < targetWordLower.length; i++) {
+        let character = targetWordLower[i];
+        charCount[character] = (charCount[character] || 0) + 1;
+    }
+    const charCountRes = charCount
+    console.log(charCount, "CASE")
     for (let i = 0; i < 5; i++) {
-      if (guessLower[i] === targetWordLower[i]) {
+        console.log("GUESS", guessLower[i], "TARGET", targetWordLower[i], "INC", targetWordLower.includes(guessLower[i]), "SEC", charCount[guessLower[i]], charCount[guessLower[i]]>0 )
+      if (guessLower[i] === targetWordLower[i] && charCount[guessLower[i]] > 0) {
         newTiles.push({ color: customColors.correct, letter: guess[i] });
         correctCount++;
-      } else if (targetWordLower.includes(guessLower[i])) {
+        console.log(charCount, "BEFORE GREEN")
+        charCount[guessLower[i]] = charCount[guessLower[i]] - 1
+        console.log(charCount, "AFTER GREEN")
+      } else if (targetWordLower.includes(guessLower[i]) && charCount[guessLower[i]] > 0) {
         newTiles.push({ color: customColors.partial, letter: guess[i] });
+        console.log(charCount, "BEFORE YELLOW")
+        charCount[guessLower[i]] = charCount[guessLower[i]] - 1
+        console.log(charCount, "AFTER YELLOW")
       } else {
         newTiles.push({ color: customColors.incorrect, letter: guess[i] });
       }
     }
   
-    const newAttempt = { guess: guess, tiles: newTiles };
+    const newAttempt = { guess: guess, tiles: newTiles, charCount: charCountRes };
     const updatedAttempts = [...attempts, newAttempt];
   
     let updatedGuessedLetters = [...guessedLetters];
@@ -106,16 +119,11 @@ const letterExists = (letter) => {
         setGameOver(true)
       }
     }
-  
     setAttempts(updatedAttempts);
     setGuessedLetters(updatedGuessedLetters);
-    console.log(guessedLetters, "TEST");
     animateTiles();
   };
   
-  
-  
-
   const animateTiles = () => {
     gsap.fromTo(
       ".tile",

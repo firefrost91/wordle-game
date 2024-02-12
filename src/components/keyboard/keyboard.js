@@ -8,7 +8,6 @@ function Keyboard({ guessedLetters, onLetterClick, keys }) {
     ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
     ["z", "x", "c", "v", "b", "n", "m"],
   ];
-  console.log("KEYS", keys)
 
   const handleClick = (letter) => {
     onLetterClick(letter);
